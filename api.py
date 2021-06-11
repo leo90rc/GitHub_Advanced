@@ -1,22 +1,22 @@
 from flask import Flask, render_template
 from src import covid_dash, hospitals_tb
-app = Flask(__name__)
-@app.route("/")
 
+
+app = Flask(__name__)
+
+@app.route("/")
 def landing_page():
     return render_template('index.html')
 
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template('ÑAÑAAÑÑAÑAÑAÑAÑÑA.html')
+    return render_template('dashboard.html')
 
 
 @app.route("/map")
 def map():
     return render_template('map.html')
-
-
 
 
 
