@@ -24,8 +24,7 @@ def convertTime(t):
 df_final = df_final.dropna(subset=["Last_Update"])
 df_final["Province_State"].fillna(value="", inplace=True)
 df_final["Last_Update"]= df_final["Last_Update"]/1000
-df_final["Last_Update"] =
-df_final["Last_Update"].apply(convertTime)
+df_final["Last_Update"] = df_final["Last_Update"].apply(convertTime)
 df_total = df_final.groupby("Country_Region",as_index=False).agg(
     {
         "Confirmed" : "sum",
@@ -36,7 +35,8 @@ total_recovered = df_final["Recovered"].sum()
 total_deaths = df_final["Deaths"].sum()
 df_top10 = df_total.nlargest(10, "Confirmed")
 top10_countries_1 = df_top10["Country_Region"].tolist()
-top10_confirmed = df_top10["Confirmed"].tolist()df_top10 = df_total.nlargest(10, "Recovered")
+top10_confirmed = df_top10["Confirmed"].tolist()
+df_top10 = df_total.nlargest(10, "Recovered")
 top10_countries_2 = df_top10["Country_Region"].tolist()
 top10_recovered = df_top10["Recovered"].tolist()
 df_top10 = df_total.nlargest(10, "Deaths")
@@ -57,13 +57,10 @@ None, None, {"type": "indicator"}, {"type": "indicator"},
 "colspan":3}, None, None],
 ]
 )
-message = df_final["Country_Region"] + " " +
-df_final["Province_State"] + "<br>"
-message += "Confirmed: " + df_final["Confirmed"].astype(str) +
-"<br>"
+message = df_final["Country_Region"] + " " + df_final["Province_State"] + "<br>"
+message += "Confirmed: " + df_final["Confirmed"].astype(str) + "<br>"
 message += "Deaths: " + df_final["Deaths"].astype(str) + "<br>"
-message += "Recovered: " + df_final["Recovered"].astype(str) +
-"<br>"
+message += "Recovered: " + df_final["Recovered"].astype(str) + "<br>"
 message += "Last updated: " + df_final["Last_Update"].astype(str)
 df_final["text"] = message
 fig.add_trace(
@@ -141,7 +138,8 @@ name= "Deaths Cases",
 marker=dict(color="crimson"),
 showlegend=True),
 row=4, col=4
-)fig.update_layout(
+)
+fig.update_layout(
 template="plotly_dark",
 title = "Global COVID-19 Cases (Last Updated: " +
 str(df_final["Last_Update"][0]) + ")",
